@@ -27,6 +27,7 @@ function nextSequence(){
     //console.log(randomChosenColour);
     gamePattern.push(randomChosenColour);
     //console.log(gamePattern); 
+    /* add change of sound here after lvl 10 */
     playSound(randomChosenColour);
     $("#" + randomChosenColour).fadeOut(100).fadeIn(100); 
 };
