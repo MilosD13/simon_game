@@ -3,11 +3,13 @@ let gamePattern = [];
 let userClickedPattern = [];
 let level = 0;
 let started = false;
+let score = 0;
 
 function startOver(){
     level = 0;
     gamePattern = [];
     started = false;
+    score = 0;
 }
 
 function playSound(name){
@@ -25,7 +27,7 @@ function nextSequence(){
     //console.log(randomChosenColour);
     gamePattern.push(randomChosenColour);
     //console.log(gamePattern); 
-    playSound(randomChosenColour)
+    playSound(randomChosenColour);
     $("#" + randomChosenColour).fadeOut(100).fadeIn(100); 
 };
 
@@ -55,8 +57,10 @@ function animatePress(currentColour){
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         console.log("success");
+        score += 5;
+        $("#score").text("Score: " + score);
         if (userClickedPattern.length === gamePattern.length){
-            setTimeout(function () {
+            setTimeout(function() {
             nextSequence();
             }, 1000);
         }
@@ -86,6 +90,8 @@ $(document).keypress(function(e){
           if(keycode == '13' && !started) {
             //console.log("game started")
             $("#level-title").text("Level " + level)
+            $("#score").css("visibility", "visible");    
+            $("#score").text("Score: " + score);
             nextSequence();
             started = true;
           }
